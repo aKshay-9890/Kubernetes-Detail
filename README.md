@@ -13,20 +13,25 @@ Features of Kubernetes:
 4.Horizontal Scaling and Load Balancing– Kubernetes can scale up and scale down the application as per the requirements.
 5.Resource Utilization– Kubernetes provides resource utilization monitoring and optimization, ensuring containers are using their resources efficiently.
 6.Support for multiple clouds and hybrid clouds– Kubernetes can be deployed on different cloud platforms and run containerized applications across multiple clouds.
-7.Extensibility– Kubernetes is very extensible and can be extended with custom plugins and controllers.
-8.Community Support- Kubernetes has a large and active community with frequent updates, bug fixes, and new features being added.
+
+/use/local/bin => contains all the binary and executable files.
+
+kubernetes Architecture:
+In kubernetes architecture there is cluster. In cluster there are two planes as follows: 
+
+{1} Master Control Plane     
+In master plane there are 4 components:
+1. API-Server : It validates the request and authenticates the user.  It exposes the Kubernetes API, which allows users, administrators, and other components to communicate with the cluster.
+2. Controller Manager : is used to monitor and make sure that every thing is working as we have define and will compare it with desire state
+3. Scheduler :The Scheduler is responsible for placing Pods onto suitable worker nodes. 
+4. etcd : it stores the metadata of all components.It holds the configuration data and the state of the entire cluster.
+
+{2} Worker Node Plane
+1. Kubelet :  The Kubelet is an agent that runs on each worker node and communicates with the master control plane.The Kubelet works closely with the master control
+   plane to start, stop, and manage containers based on Pod specifications.
+2. kube-Proxy :  Kube Proxy sets up routing and load balancing so that applications can seamlessly communicate with each other and external resources.
+3. Container runtime : A container runtime is the software responsible for running containers on the worker nodes.
 
 
-Benefits of Using Kubernetes
-1. Automated deployment and management
-If you are using Kubernetes for deploying the application then no need for manual intervention kubernetes will take care of everything like automating the deployment, scaling, and containerizing the application.
-Kubernetes will reduce the errors that can be made by humans which makes the deployment more effective.
-2. Scalability
-You can scale the application containers depending on the incoming traffic Kubernetes offers Horizontal pod scaling the pods will be scaled automatically depending on the load.
-3. High availability
-You can achieve high availability for your application with the help of Kubernetes and also it will reduce the latency issues for the end users.
-4. Cost-effectiveness
-If there is unnecessary use of infrastructure the cost will also increase kubernetes will help you to reduce resource utilization and control the overprovisioning of infrastructure.
-5. Improved developer productivity
-Developer can concentrate more on the developing part kubernetes will reduce the efforts of deploying the application.
+
 
