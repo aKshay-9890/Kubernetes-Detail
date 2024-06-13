@@ -16,17 +16,17 @@ Features of Kubernetes:
 
 /use/local/bin => contains all the binary and executable files.
 
-kubernetes Architecture:
+# kubernetes Architecture:
 In kubernetes architecture there is cluster. In cluster there are two planes as follows: 
 
-{1} Master Control Plane     
+# {1} Master Control Plane     
 In master plane there are 4 components:
 1. API-Server : It validates the request and authenticates the user.  It exposes the Kubernetes API, which allows users, administrators, and other components to communicate with the cluster.
 2. Controller Manager : is used to monitor and make sure that every thing is working as we have define and will compare it with desire state
 3. Scheduler :The Scheduler is responsible for placing Pods onto suitable worker nodes. 
 4. etcd : it stores the metadata of all components.It holds the configuration data and the state of the entire cluster.
 
-{2} Worker Node Plane
+# {2} Worker Node Plane
 1. Kubelet :  The Kubelet is an agent that runs on each worker node and communicates with the master control plane.The Kubelet works closely with the master control
    plane to start, stop, and manage containers based on Pod specifications.
 2. kube-Proxy :  Kube Proxy sets up routing and load balancing so that applications can seamlessly communicate with each other and external resources.
@@ -66,14 +66,17 @@ Error Handling	            Errors need to be handled at each step	              
 Scalability	               Manual scaling requires explicit commands	                      Declarative scaling through configuration files
 Examples in Kubernetes    	kubectl create, kubectl delete, kubectl scale	                kubectl apply, kubectl delete -f, kubectl diff
 
+# Pod recreating mechanism is called as Auto Healing
+In deployment we decide how many pods can be in worker node
 
 # what is yaml? 
 => yet another markup language
 
 In terms of kubernetes pod is a yamal manifest
-
+watch -n 2 kubectl get pod  (to see the pod)
 commands :-
--kubectl get all    (shows all services) 
+-kubectl get all    (shows all resources) 
+-kubectl get all -A
 -kubectl get namespaces  
    There are default 4 namespaces:
     default
@@ -94,3 +97,7 @@ kubectl create -f pod.yml
 
 kubectl get po  
 kubectl describe po nginx
+
+To see 
+kubctl get po
+kubectl get po <> -o yml
