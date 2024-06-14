@@ -69,11 +69,17 @@ Examples in Kubernetes    	kubectl create, kubectl delete, kubectl scale	       
 # Pod recreating mechanism is called as Auto Healing
 In deployment we decide how many pods can be in worker node
 
+# Why kubernetes is required?
+=> Kubernetes does auto healing and auto scaling.
+   Auto Healing contains Deployment and replicaset. Uses labels and selector method.
+   Replica decides how many pods can contain in node.
+   
 # what is yaml? 
 => yet another markup language
 
 In terms of kubernetes pod is a yamal manifest
 watch -n 2 kubectl get pod  (to see the pod)
+
 commands :-
 -kubectl get all    (shows all resources) 
 -kubectl get all -A
@@ -98,6 +104,15 @@ kubectl create -f pod.yml
 kubectl get po  
 kubectl describe po nginx
 
-To see 
+# To see yml file of pod : 
 kubctl get po
-kubectl get po <> -o yml
+kubectl get po <"pod-name"> -o yml
+
+# Kubernetes service is a service which provide a static IP to pod .
+ # Service Types:
+1. Load Balancer service: using labels and selectors, and connect to outer world
+2. Node Port Service (port range 30,000 - 32 ,767)
+3. Cluster IP Service
+ 
+
+What is a static pod ?
