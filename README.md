@@ -73,6 +73,11 @@ In deployment we decide how many pods can be in worker node
 => Kubernetes does auto healing and auto scaling.
    Auto Healing contains Deployment and replicaset. Uses labels and selector method.
    Replica decides how many pods can contain in node.
+
+# Services : In Kubernetes, a Service is a method for exposing a network application that is running as one or more Pods in your cluster.
+  1. Load balancing 
+  2. Service Discovery
+  3. Exposing to world
    
 # what is yaml? 
 => yet another markup language
@@ -92,7 +97,7 @@ commands :-
 -
 -kubectl get namespaces
 -kubectl get pods -n <namespaces>
-To create namespaces:
+# To create namespaces:
 kubectl create namespace -n CDECB
 vim mynamespace.yml
 
@@ -110,9 +115,9 @@ kubectl get po <"pod-name"> -o yml
 
 # Kubernetes service is a service which provide a static IP to pod .
  # Service Types:
-1. Load Balancer service: using labels and selectors, and connect to outer world
-2. Node Port Service (port range 30,000 - 32 ,767)
-3. Cluster IP Service
+1. Load Balancer service: using labels and selectors, service will expose applicationto external world.
+2. Node Port Service : those who have access to worker node/ VPC /Instance i.e inside organization (port range 30,000 - 32 ,767).
+3. Cluster IP Service : Application will access only inside the kubernetes cluster.
  
 
 What is a static pod ?
