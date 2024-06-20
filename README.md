@@ -119,5 +119,11 @@ kubectl get po <"pod-name"> -o yml
 2. Node Port Service : those who have access to worker node/ VPC /Instance i.e inside organization (port range 30,000 - 32 ,767).
 3. Cluster IP Service : Application will access only inside the kubernetes cluster.
  
-
-What is a static pod ?
+# Taints and toleration:
+- Taints and Toleration work together to ensurethat pods are not schedule onto inappropriate nodes.
+- One or more Taints are applied to a node, this mark that node shoould not accept any other pod that do not tolerate taints.
+- Taints are applied to nodes and tolerants are applied to pods.
+- Taint Effect Types:
+-    1. NoSchedule --> No pod will be able to schedule onto taint applieds node unless it has a matching toleration.
+     2. Prefer NoSchedule --> Soft version of NoSchedule - the system will try to avoid placing a pod that does not tolerate the taint on the node, but it is not required.
+     3. NoExecute --> Any pod that does not tolerate the taint will evicted immediately, and pods that do tolerate the taint will never be evicted.
