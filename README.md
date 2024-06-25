@@ -127,3 +127,9 @@ kubectl get po <"pod-name"> -o yml
 -    1. NoSchedule --> No pod will be able to schedule onto taint applieds node unless it has a matching toleration.
      2. Prefer NoSchedule --> Soft version of NoSchedule - the system will try to avoid placing a pod that does not tolerate the taint on the node, but it is not required.
      3. NoExecute --> Any pod that does not tolerate the taint will evicted immediately, and pods that do tolerate the taint will never be evicted.
+
+
+
+# Rollback and Rollout
+# Comment and Arguments
+# Environment Variable
