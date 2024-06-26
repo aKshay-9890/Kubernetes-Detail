@@ -66,6 +66,9 @@ Error Handling	            Errors need to be handled at each step	              
 Scalability	               Manual scaling requires explicit commands	                      Declarative scaling through configuration files
 Examples in Kubernetes    	kubectl create, kubectl delete, kubectl scale	                kubectl apply, kubectl delete -f, kubectl diff
 
+# Declarative: In this method we write yaml/manifest file and then do the changes. Here if we want to add labels then we add it in yaml file.
+# Imperative: By using direct commands i.e. if we want to attach labels to pod by using command we can do it directly
+
 # Pod recreating mechanism is called as Auto Healing
 In deployment we decide how many pods can be in worker node
 
@@ -130,6 +133,15 @@ kubectl get po <"pod-name"> -o yml
 
 
 # Labels and Selectors
+ Labels are the mechanism you use to organise kubernetes objects. A label is akey-value pair without any predefined meaning that can be attached to the object (Pod / Node). Multiple labels can be added to pods 
+  Command To add label to an existing pod :
+    ==> kubectl label pods <pod-name> <key>=<value>
+    To show labels:
+    ==> kubectl get pods --shoe-labels
+    to list pods matching labels 
+    ==> kubectl get pods -l <key>=<value>
+    to delete pod using labels
+    ==> kubectl delete pod -l <key>=<value>
 # Rollback and Rollout
 # Comment and Arguments
 # Environment Variable
