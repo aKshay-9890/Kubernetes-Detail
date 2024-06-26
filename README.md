@@ -129,7 +129,9 @@ kubectl get po <"pod-name"> -o yml
      3. NoExecute --> Any pod that does not tolerate the taint will evicted immediately, and pods that do tolerate the taint will never be evicted.
 
 
-
+# Labels and Selectors
 # Rollback and Rollout
 # Comment and Arguments
 # Environment Variable
+
+What is the difference between configmap and secrets ?
