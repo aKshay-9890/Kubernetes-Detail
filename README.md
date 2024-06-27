@@ -146,4 +146,9 @@ kubectl get po <"pod-name"> -o yml
 # Comment and Arguments
 # Environment Variable
 
-What is the difference between configmap and secrets ?
+What is the difference between configmap and secrets ? 
+What is difference statefullset and deployment ?
+# Statefullset 
+# Persistent Volume & Persistent Volume Claim
+
+==>> To manage statefull application we use statefulset
