@@ -120,17 +120,17 @@ kubectl get po <"pod-name"> -o yml
  # Service Types:
 1. Load Balancer service: using labels and selectors, service will expose applicationto external world.
 2. Node Port Service : those who have access to worker node/ VPC /Instance i.e inside organization (port range 30,000 - 32 ,767).
-3. Cluster IP Service : Application will access only inside the kubernetes cluster.
- 
+3. Cluster IP Service : Application will access only inside the kubernetes cluster. (by default)
+ 4. Externalname service : use to map 
+
 # Taints and toleration:
-- Taints and Toleration work together to ensurethat pods are not schedule onto inappropriate nodes.
+- Taints and Toleration work together to ensure that pods are not schedule onto inappropriate nodes.
 - One or more Taints are applied to a node, this mark that node shoould not accept any other pod that do not tolerate taints.
 - Taints are applied to nodes and tolerants are applied to pods.
 - Taint Effect Types:
 -    1. NoSchedule --> No pod will be able to schedule onto taint applieds node unless it has a matching toleration.
      2. Prefer NoSchedule --> Soft version of NoSchedule - the system will try to avoid placing a pod that does not tolerate the taint on the node, but it is not required.
      3. NoExecute --> Any pod that does not tolerate the taint will evicted immediately, and pods that do tolerate the taint will never be evicted.
-
 
 # Labels and Selectors
  Labels are the mechanism you use to organise kubernetes objects. A label is akey-value pair without any predefined meaning that can be attached to the object (Pod / Node). Multiple labels can be added to pods 
@@ -145,10 +145,11 @@ kubectl get po <"pod-name"> -o yml
 # Rollback and Rollout
 # Comment and Arguments
 # Environment Variable
+# Configmap and secrets
 
 What is the difference between configmap and secrets ? 
 What is difference statefullset and deployment ?
 # Statefullset 
-# Persistent Volume & Persistent Volume Claim
+# Persistent Volume & Persistent Volume Claim and their access mode. PV & PVC
 
 ==>> To manage statefull application we use statefulset
