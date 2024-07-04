@@ -118,22 +118,23 @@ kubectl get po <"pod-name"> -o yml
 
 # Kubernetes service is a service which provide a static IP to pod .
  # Service Types:
-1. Load Balancer service: using labels and selectors, service will expose applicationto external world.
+1. Load Balancer service: using labels and selectors, service will expose applicatio onto external world.
 2. Node Port Service : those who have access to worker node/ VPC /Instance i.e inside organization (port range 30,000 - 32 ,767).
 3. Cluster IP Service : Application will access only inside the kubernetes cluster. (by default)
  4. Externalname service : use to map 
 
 # Taints and toleration:
 - Taints and Toleration work together to ensure that pods are not schedule onto inappropriate nodes.
-- One or more Taints are applied to a node, this mark that node shoould not accept any other pod that do not tolerate taints.
+- One or more Taints are applied to a node, this mark that node should not accept any other pod that do not tolerate taints.
 - Taints are applied to nodes and tolerants are applied to pods.
 - Taint Effect Types:
 -    1. NoSchedule --> No pod will be able to schedule onto taint applieds node unless it has a matching toleration.
-     2. Prefer NoSchedule --> Soft version of NoSchedule - the system will try to avoid placing a pod that does not tolerate the taint on the node, but it is not required.
+     2. Prefer NoSchedule --> Soft version of NoSchedule - the controller will try to avoid placing a pod that does not tolerate the taint on the node, but it is not required.
      3. NoExecute --> Any pod that does not tolerate the taint will evicted immediately, and pods that do tolerate the taint will never be evicted.
 
 # Labels and Selectors
- Labels are the mechanism you use to organise kubernetes objects. A label is akey-value pair without any predefined meaning that can be attached to the object (Pod / Node). Multiple labels can be added to pods 
+ Labels are the mechanism you use to organise kubernetes objects. A label is a key-value pair without any predefined meaning that can be attached to the object (Pod / Node). Multiple labels can be added to pods.
+ Selectors are used to identify group of objects.
   Command To add label to an existing pod :
     ==> kubectl label pods <pod-name> <key>=<value>
     To show labels:
@@ -142,14 +143,52 @@ kubectl get po <"pod-name"> -o yml
     ==> kubectl get pods -l <key>=<value>
     to delete pod using labels
     ==> kubectl delete pod -l <key>=<value>
+
 # Rollback and Rollout
-# Comment and Arguments
+==> A rolling update allows you to deploy a newer version of an application (such as bug fixes, minor features, or enhancements) without causing downtime.
+Here’s how it works: A new ReplicaSet is created, and the Deployment manages moving Pods from the old ReplicaSet to the new one at a controlled rate.
+Commands for rollout:
+kubectl create deploy nginx-deploy --image=nginx:1.14.1
+kubectl get deploy   (to see rollout)
+kubectl set image deployment/<deployment-name> nginx=nginx:1.16.1 --record=true  (to change version and save command)
+kubectl rollout status deployment/<deployment-name>  (To check status)
+    kubectl rollout status deployment/nginx-deployment
+   kubectl rollout history deployment/nginx-deployment  --revision=<revision no.> (To check history & of particular version)
+   kubectl rollout undo deployment/nginx-deployment  (To undo the latest rollout)
+   kubectl rollout undo deployment/<deployment-name> --to-revision=<revision-number>   (Rollout to previous versions)
+
+==> Rollback is the ability to revert back to an older working version of an application in case something goes wrong.
+For example, if a new deployment causes issues, you can use the kubectl rollout undo command to revert to the previous known state.
+
+# Command and Arguments
 # Environment Variable
 # Configmap and secrets
 
 What is the difference between configmap and secrets ? 
-What is difference statefullset and deployment ?
-# Statefullset 
+
+Feature                  	ConfigMap	                                                         Secret
+Purpose          	   Store non-sensitive configuration data	                  Store sensitive data, such as passwords and tokens
+Data Encoding	      Plaintext (base64-encoded when stored in etcd)	         Base64-encoded (and encrypted at rest in etcd)
+Use Case Examples    Application configuration, environment variables	      Passwords, API keys, certificates
+Data Limit   	      Large, up to 1MB	                                       Smaller, recommended to keep it within a few KB
+Security            	Not encrypted, only base64-encoded	                     Encrypted at rest and more secure
+Access Control	      Managed by Kubernetes RBAC	                              Managed by Kubernetes RBAC
+Access from Pods	   Mounted as volumes or used as environment variables	   Mounted as volumes or used as environment variables
+Creation            	kubectl create configmap	                              kubectl create secret
+
+# What is difference statefullset and deployment ?
+Feature	                        StatefulSet	                                         Deployment
+Purpose              	Manages stateful applications                     	    Manages stateless applications
+Pod Identity        	   Each Pod has a unique, stable network identity	       Pods are interchangeable
+Pod Names	            Pods are named with a predictable ordinal suffix	    Pod names are generated randomly
+Persistent Storage	   Supports persistent storage with unique volumes      	 Can use persistent storage, but volumes are not unique
+Scaling	               Maintains the order of deployment and scaling	       Scales up or down randomly
+Update Strategy	      Rolling updates with ordered guarantees	             Rolling updates without ordering guarantees
+Network Identity	      Each Pod gets a stable network identity (DNS)	       Pods share the same network identity
+Use Case Examples     	Databases, Kafka, Zookeeper	                         Web servers, microservices, batch jobs
+
+# Statefullset : In Kubernetes, a StatefulSet is a workload API object used to manage stateful applications. It provides unique guarantees about the ordering and uniqueness of Pods, which is particularly useful for stateful applications where each instance needs persistent storage and stable network identities.
+
 # Persistent Volume & Persistent Volume Claim and their access mode. PV & PVC
 
 ==>> To manage statefull application we use statefulset
