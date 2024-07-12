@@ -121,7 +121,7 @@ kubectl get po <"pod-name"> -o yml
 1. Load Balancer service: using labels and selectors, service will expose applicatio onto external world.
 2. Node Port Service : those who have access to worker node/ VPC /Instance i.e inside organization (port range 30,000 - 32 ,767).
 3. Cluster IP Service : Application will access only inside the kubernetes cluster. (by default)
- 4. Externalname service : use to map 
+ 4. Externalname service : use to map DNS
 
 # Taints and toleration:
 - Taints and Toleration work together to ensure that pods are not schedule onto inappropriate nodes.
@@ -162,10 +162,9 @@ For example, if a new deployment causes issues, you can use the kubectl rollout 
 
 # Command and Arguments
 # Environment Variable
+
 # Configmap and secrets
-
 What is the difference between configmap and secrets ? 
-
 Feature                  	ConfigMap	                                                         Secret
 Purpose          	   Store non-sensitive configuration data	                  Store sensitive data, such as passwords and tokens
 Data Encoding	      Plaintext (base64-encoded when stored in etcd)	         Base64-encoded (and encrypted at rest in etcd)
@@ -176,7 +175,7 @@ Access Control	      Managed by Kubernetes RBAC	                              Ma
 Access from Pods	   Mounted as volumes or used as environment variables	   Mounted as volumes or used as environment variables
 Creation            	kubectl create configmap	                              kubectl create secret
 
-# What is difference statefullset and deployment ?
+# What is difference between statefullset and deployment ?
 Feature	                        StatefulSet	                                         Deployment
 Purpose              	Manages stateful applications                     	    Manages stateless applications
 Pod Identity        	   Each Pod has a unique, stable network identity	       Pods are interchangeable
@@ -190,5 +189,16 @@ Use Case Examples     	Databases, Kafka, Zookeeper	                         Web 
 # Statefullset : In Kubernetes, a StatefulSet is a workload API object used to manage stateful applications. It provides unique guarantees about the ordering and uniqueness of Pods, which is particularly useful for stateful applications where each instance needs persistent storage and stable network identities.
 
 # Persistent Volume & Persistent Volume Claim and their access mode. PV & PVC
+# Persistent Volume (PV)
+A Persistent Volume (PV) is a piece of storage in the cluster that has been provisioned by an administrator or dynamically provisioned using Storage Classes. It is a resource in the cluster just like a node.
+
+# Persistent Volume Claim (PVC)
+A Persistent Volume Claim (PVC) is a request for storage by a user. It is similar to a pod. Pods consume node resources, and PVCs consume PV resources. Pods can request specific levels of resources (CPU and Memory); PVCs can request specific size and access modes (e.g., they can be mounted once read/write or many times read-only).
+
+# Access Modes :
+1. ReadWriteOnce (RWO): The volume can be mounted as read-write by a single node.
+2. ReadOnlyMany (ROX): The volume can be mounted as read-only by many nodes.
+3. ReadWriteMany (RWX): The volume can be mounted as read-write by many nodes.
+4. ReadWriteOncePod (RWOP): The volume can be mounted as read-write by a single Pod 
 
 ==>> To manage statefull application we use statefulset
