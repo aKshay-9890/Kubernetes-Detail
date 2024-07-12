@@ -23,7 +23,7 @@ In kubernetes architecture there is cluster. In cluster there are two planes as 
 In master plane there are 4 components:
 1. API-Server : It validates the request and authenticates the user.  It exposes the Kubernetes API, which allows users, administrators, and other components to communicate with the cluster.
 2. Controller Manager : is used to monitor and make sure that every thing is working as we have define and will compare it with desire state
-3. Scheduler :The Scheduler is responsible for placing Pods onto suitable worker nodes. 
+3. Scheduler :The Scheduler is responsible for placing Pods onto suitable worker nodes.  
 4. etcd : it stores the metadata of all components.It holds the configuration data and the state of the entire cluster.
 
 # {2} Worker Node Plane
@@ -128,9 +128,9 @@ kubectl get po <"pod-name"> -o yml
 - One or more Taints are applied to a node, this mark that node should not accept any other pod that do not tolerate taints.
 - Taints are applied to nodes and tolerants are applied to pods.
 - Taint Effect Types:
--    1. NoSchedule --> No pod will be able to schedule onto taint applieds node unless it has a matching toleration.
-     2. Prefer NoSchedule --> Soft version of NoSchedule - the controller will try to avoid placing a pod that does not tolerate the taint on the node, but it is not required.
-     3. NoExecute --> Any pod that does not tolerate the taint will evicted immediately, and pods that do tolerate the taint will never be evicted.
+-    1. NoSchedule --> The pod will not get scheduled to the node without a matching toleration.
+     2. Prefer NoSchedule --> This is a softer version of NoSchedule where the controller will not try to schedule a pod with the tainted node. However, it is not a strict requirement.
+     3. NoExecute -->  This will immediately evict all the pods without the matching toleration from the node.
 
 # Labels and Selectors
  Labels are the mechanism you use to organise kubernetes objects. A label is a key-value pair without any predefined meaning that can be attached to the object (Pod / Node). Multiple labels can be added to pods.
